@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import { Container } from "./styles";
 
 const Home = () => {
-  return (
-    
-  )
-}
+  return <Container></Container>;
+};
 
-export default Home
+export default Home;

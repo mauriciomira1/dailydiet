@@ -26,13 +26,13 @@
   const dietMeals = fetchDiet.map(dietDataOfDay => <DietPerDay dietDataOfDay={dietDataOfDay}/>)
 />
 
-### Criação dos componentes da página Statistics
+### Criação dos componentes da secundários da Home
 
 1. Componente de Header com Width full <HeaderFullWidth/>
 2. Componente de subtítulo <Subtitle/>
 3. Componente de View com título MD e subtítulo SM, com opção de cor de background e width 100% <DetailsDataCard title="22" subtitle="melhor sequência de pratos dentro da dieta" bgColor={${({theme}) => theme.COLORS.GRAY_200}}/>
 
-### Criação da página Statistics
+### Criação com componente Statistics da home
 
 <Container>
   <HeaderFullWidth/>

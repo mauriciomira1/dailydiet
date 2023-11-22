@@ -6,11 +6,12 @@ import {
   NunitoSans_400Regular,
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
+import Home from "@screens/Home";
 
 export default function App() {
   return (
     <View>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Home />
       <StatusBar style="auto" />
     </View>
   );

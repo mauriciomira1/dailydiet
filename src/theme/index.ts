@@ -1,22 +1,22 @@
 export default {
   COLORS: {
-    "primary-dark": "#639339",
-    "primary-mid": "#CBE4B4",
-    "primary-light": "#E5F0DB",
+    "PRIMARY-DARK": "#639339",
+    "PRIMARY-MID": "#CBE4B4",
+    "PRIMARY-LIGHT": "#E5F0DB",
 
-    "secondary-dark": "#BF3B44",
-    "secondary-mid": "#F3BABD",
-    "secondary-light": "#F4E6E7",
+    "SECONDARY-DARK": "#BF3B44",
+    "SECONDARY-MID": "#F3BABD",
+    "SECONDARY-LIGHT": "#F4E6E7",
 
-    "gray-1": "#1B1D1E",
-    "gray-2": "#333638",
-    "gray-3": "#5C6265",
-    "gray-4": "#B9BBBC",
-    "gray-5": "#DDDEDF",
-    "gray-6": "#EFF0F0",
-    "gray-7": "#FAFAFA",
+    "GRAY-1": "#1B1D1E",
+    "GRAY-2": "#333638",
+    "GRAY-3": "#5C6265",
+    "GRAY-4": "#B9BBBC",
+    "GRAY-5": "#DDDEDF",
+    "GRAY-6": "#EFF0F0",
+    "GRAY-7": "#FAFAFA",
 
-    white: "#FFFFFF",
+    WHITE: "#FFFFFF",
   },
   FONT_FAMILY: {
     REGULAR: "NunitoSans_400Regular",
