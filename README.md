@@ -8,7 +8,7 @@
 
 1. Header (ícone + foto) <Header/>
 2. Componente de View com opção de cor, título LG, subtítulo (X,XX% das refeições dentro da dieta) (título caixa alta + subtítulo + ícone (com opção de cor)) <StatisticsCard onPress={abre a página de estatísticas}/>
-3. Componente de texto padrão (fontSize SM) <TextBody/>
+3. Componente de texto padrão (fontSize SM) <TextDefault/>
 4. Componente de botão width 100% bg cinza e text white (props: text, ícone '+' opcional) <ButtonDefault onPress={abre a página de nova refeição} title="Nova refeição"/>
 5. Componente do conjunto de refeições por dia <DietPerDay/>, composto pelos componentes 6 e 7 abaixo.
 6. Componente de data 12.08.2023 <DayOfDiet/>
@@ -20,7 +20,7 @@
 
   <Header/>
   <StatisticsCard onPress={abre a página de estatísticas}/>
-  <TextBody/>
+  <TextDefault/>
   <ButtonDefault onPress={abre a página de nova refeição} title="Nova refeição" />
   const fetchDiet = Async...
   const dietMeals = fetchDiet.map(dietDataOfDay => <DietPerDay dietDataOfDay={dietDataOfDay}/>)
