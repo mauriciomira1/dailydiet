@@ -2,14 +2,15 @@ import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  flex: 1;
 
   gap: 10px;
 
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   box-shadow: 10px 10px 10px ${({ theme }) => theme.COLORS.GRAY_4};
+
   border-top-left-radius: 14px;
   border-top-right-radius: 14px;
+
   padding: 24px;
 `;
 
@@ -25,6 +26,8 @@ export const Title = styled.Text`
 `;
 
 export const DataArea = styled.View`
+  width: 100%;
+  min-height: 100px;
   gap: 4px;
   flex: 1;
 
@@ -38,7 +41,11 @@ export const DataArea = styled.View`
 
 export const ShortDataArea = styled.View`
   flex-direction: row;
-  gap: 16px;
+
+  gap: 10px;
+
+  justify-items: center;
+  align-items: center;
 `;
 
 export const ValueTitle = styled.Text`

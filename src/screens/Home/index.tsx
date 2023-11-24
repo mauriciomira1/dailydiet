@@ -8,6 +8,7 @@ import ButtonDefault from "@components/ButtonDefault";
 import StatisticsCard from "@components/StatisticsCard";
 import { ScrollView } from "react-native";
 import StatisticsArea from "@components/StatisticsArea";
+import StatisticsBigCard from "@components/StatisticsBigCard";
 
 export type DataProps = {
   title: string;
@@ -101,7 +102,7 @@ const Home = () => {
       </Container>
     </ScrollView> */
     <>
-      <StatisticsCard percentage={92.16} />
+      <StatisticsBigCard percentage={42.16} />
       <StatisticsArea />
     </>
   );

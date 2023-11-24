@@ -1,17 +1,18 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css, useTheme } from "styled-components/native";
-import { ArrowUpRight } from "phosphor-react-native";
+import { ArrowLeft } from "phosphor-react-native";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 type ContainerProps = {
   percentage: Float;
 };
 
-export const Container = styled(TouchableOpacity)<ContainerProps>`
-  border-radius: 5px;
-  justify-content: center;
+export const Container = styled.View<ContainerProps>`
+  margin-bottom: -10px;
+  padding: 50px;
+
   align-items: center;
-  padding: 10px;
+
   background-color: ${({ percentage }) => {
     const { COLORS } = useTheme();
     return percentage > 60 ? COLORS.PRIMARY_LIGHT : COLORS.SECONDARY_LIGHT;
@@ -24,6 +25,7 @@ export const PercentageTitle = styled.Text`
     font-family: ${theme.FONT_FAMILY.BOLD};
     color: ${theme.COLORS.GRAY_1};
   `}
+  margin-top: 20px;
 `;
 
 export const Description = styled.Text`
@@ -35,8 +37,11 @@ export const Description = styled.Text`
   `}
 `;
 
-export const ArrowIcon = styled(ArrowUpRight).attrs({
-  size: 20,
+export const BackIconButton = styled(ArrowLeft).attrs({
+  size: 25,
 })`
-  margin-bottom: -10px;
+  color: ${({ theme }) => theme.COLORS.PRIMARY_DARK};
+  /*   position: absolute;
+  top: 50px;
+  left: 25px; */
 `;
