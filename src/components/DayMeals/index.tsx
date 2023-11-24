@@ -1,21 +1,28 @@
 import React from "react";
 import { Container, Title } from "./styles";
 import MealDetailsTimeCard from "./MealDetailsTimeCard";
-import { ViewProps } from "react-native";
+import { View, ViewProps } from "react-native";
+import { DataProps } from "@screens/Home";
 
-type Props = ViewProps;
+type Props = ViewProps & {
+  DATA: DataProps[];
+};
 
-const DayMeals = ({ ...rest }: Props) => {
+const DayMeals = ({ DATA, ...rest }: Props) => {
   return (
     <Container {...rest}>
-      <Title>12.08.22</Title>
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
-      <MealDetailsTimeCard mealName="Pipoca doce" onDiet timeInfo="22:00" />
+      {DATA.map((data) => (
+        <View key={data.title} style={{ gap: 7 }}>
+          <Title>{data.title}</Title>
+          {data.meals.map((meal) => (
+            <MealDetailsTimeCard
+              onDiet={meal.onDiet}
+              mealName={meal.mealName}
+              timeInfo={meal.timeInfo}
+            />
+          ))}
+        </View>
+      ))}
     </Container>
   );
 };
