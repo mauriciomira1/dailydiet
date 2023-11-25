@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, InputData, InputTitle } from "./styles";
-import { TextInputProps } from "react-native";
+import { TextInput, TextInputProps } from "react-native";
 
-type Props = TextInputProps & {
-  title: string;
-};
+type Props = TextInputProps &
+  React.ClassAttributes<TextInput> & {
+    title: string;
+  };
+
+// React.ClassAttributes<TextInput>.ref?: React.LegacyRef<TextInput> | undefined
 
 const InputItemName = ({ title }: Props) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <Container>
       <InputTitle>{title}</InputTitle>
-      <InputData />
+      <InputData
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        selected={isFocused}
+      />
     </Container>
   );
 };
