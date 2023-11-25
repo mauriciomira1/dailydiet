@@ -41,7 +41,4 @@ export const BackIconButton = styled(ArrowLeft).attrs({
   size: 25,
 })`
   color: ${({ theme }) => theme.COLORS.PRIMARY_DARK};
-  /*   position: absolute;
-  top: 50px;
-  left: 25px; */
 `;
