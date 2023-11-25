@@ -15,6 +15,7 @@ import Home from "@screens/Home";
 
 import Loading from "@components/Loading";
 import NewMeal from "@screens/NewMeal";
+import DietSuccess from "@screens/DietSuccess";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -23,7 +24,8 @@ export default function App() {
     <ThemeProvider theme={theme}>
       <StatusBar translucent style="auto" />
       {/* {fontsLoaded ? <Home /> : <Loading />} */}
-      {fontsLoaded ? <NewMeal /> : <Loading />}
+      {/* {fontsLoaded ? <NewMeal /> : <Loading />} */}
+      {fontsLoaded ? <DietSuccess /> : <Loading />}
     </ThemeProvider>
   );
 }

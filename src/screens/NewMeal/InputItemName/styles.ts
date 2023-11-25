@@ -28,6 +28,12 @@ export const InputData = styled.TextInput<{ selected?: boolean }>`
     font-family: ${theme.FONT_FAMILY.REGULAR};
     background-color: ${theme.COLORS.WHITE};
 
-    border: 0.5px solid ${selected ? theme.COLORS.GRAY_2 : theme.COLORS.GRAY_4};
+    ${selected
+      ? css`
+          border: 0.8px solid ${theme.COLORS.PRIMARY_DARK};
+        `
+      : css`
+          border: 0.5px solid ${theme.COLORS.GRAY_4};
+        `}
   `}
 `;

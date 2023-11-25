@@ -2,13 +2,14 @@ import React, { useState, useRef } from "react";
 
 import { TextInput, View } from "react-native";
 
-import { Container, DividedView, Title } from "./styles";
+import { Container, DividedView } from "./styles";
 
 import InputItemName from "./InputItemName";
 
 import CardDefault from "@components/CardDefault";
-import CheckboxWithTitle from "@components/CheckboxWithTitle";
 import ButtonDefault from "@components/ButtonDefault";
+import HeaderSecondary from "@components/HeaderSecondary";
+import CheckboxWithTitle from "@components/CheckboxWithTitle";
 
 const NewMeal = () => {
   const [name, setName] = useState("");
@@ -29,7 +30,7 @@ const NewMeal = () => {
 
   return (
     <Container>
-      <Title>Nova refeição</Title>
+      <HeaderSecondary title="Nova refeição" />
 
       <CardDefault>
         <InputItemName
