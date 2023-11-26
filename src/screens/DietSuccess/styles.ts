@@ -13,10 +13,11 @@ export const Container = styled(SafeAreaView)`
 
 export const Title = styled.Text`
   ${({ theme }) => css`
-    color: ${theme.COLORS.PRIMARY_MID};
+    color: ${theme.COLORS.PRIMARY_DARK};
     font-size: ${theme.FONT_SIZE.LG}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
   `}
+  margin-bottom: 6px;
 `;
 
 export const Subtittle = styled.Text`
@@ -25,4 +26,10 @@ export const Subtittle = styled.Text`
     font-size: ${theme.FONT_SIZE.SM}px;
     font-family: ${theme.FONT_FAMILY.REGULAR};
   `}
+`;
+
+export const Img = styled.Image`
+  width: 224px;
+  height: 288px;
+  padding: 40px 0;
 `;

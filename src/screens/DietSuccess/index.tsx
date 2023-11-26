@@ -1,7 +1,8 @@
 import React from "react";
-import { Container, Subtittle, Title } from "./styles";
+import { Container, Img, Subtittle, Title } from "./styles";
 import { Text } from "react-native";
-import LottieView from "lottie-react-native";
+import SuccessImg from "@assets/success-animation.png";
+import ButtonDefault from "@components/ButtonDefault";
 
 const DietSuccess = () => {
   return (
@@ -11,11 +12,8 @@ const DietSuccess = () => {
         Você continua{" "}
         <Text style={{ fontWeight: "bold" }}>dentro da dieta</Text>. Muito bem!
       </Subtittle>
-      <LottieView
-        source={require("@assets/failedAnimation.json")}
-        autoPlay
-        loop
-      />
+      <Img source={SuccessImg} />
+      <ButtonDefault title="Ir para a página inicial" />
     </Container>
   );
 };
