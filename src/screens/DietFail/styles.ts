@@ -13,7 +13,7 @@ export const Container = styled(SafeAreaView)`
 
 export const Title = styled.Text`
   ${({ theme }) => css`
-    color: ${theme.COLORS.PRIMARY_DARK};
+    color: ${theme.COLORS.SECONDARY_DARK};
     font-size: ${theme.FONT_SIZE.XL}px;
     font-family: ${theme.FONT_FAMILY.BOLD};
   `}

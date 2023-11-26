@@ -1,16 +1,33 @@
 import React from "react";
-import { ButtonIcon, ButtonTitle, Container } from "./styles";
+import {
+  ButtonIconPlus,
+  ButtonIconDelete,
+  ButtonIconEdit,
+  ButtonTitle,
+  Container,
+} from "./styles";
 
-type Props = {
+export type ButtonDefaultProps = {
   title: string;
-  showIcon?: boolean;
+  invertedBtn?: boolean;
+  IconType?: "ButtonIconPlus" | "ButtonIconEdit" | "ButtonIconDelete";
 };
 
-const ButtonDefault = ({ title, showIcon = false }: Props) => {
+const ButtonDefault = ({
+  title,
+  invertedBtn = false,
+  IconType,
+}: ButtonDefaultProps) => {
+  const IconComponents = {
+    ButtonIconPlus: <ButtonIconPlus invertedBtn={invertedBtn} />,
+    ButtonIconEdit: <ButtonIconEdit invertedBtn={invertedBtn} />,
+    ButtonIconDelete: <ButtonIconDelete invertedBtn={invertedBtn} />,
+  };
+
   return (
-    <Container>
-      {showIcon && <ButtonIcon />}
-      <ButtonTitle>{title}</ButtonTitle>
+    <Container invertedBtn={invertedBtn}>
+      {IconType && IconComponents[IconType]}
+      <ButtonTitle invertedBtn={invertedBtn}>{title}</ButtonTitle>
     </Container>
   );
 };

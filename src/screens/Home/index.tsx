@@ -91,16 +91,16 @@ const DATA: DataProps[] = [
 
 const Home = () => {
   return (
-    /*     <ScrollView>
+    /*        <ScrollView>
       <Container>
         <StatisticsCard percentage={92.16} />
         <Header />
         <StatisticsCard percentage={92.16} />
         <TextDefault description="Refeições" style={{ marginTop: 30 }} />
-        <ButtonDefault title="Nova refeição" showIcon />
+        <ButtonDefault title="Nova refeição"  IconType="ButtonIconPlus"/>
         <DayMeals DATA={DATA} />
       </Container>
-    </ScrollView> */
+    </ScrollView>  */
     <>
       <StatisticsBigCard percentage={42.16} />
       <StatisticsArea />
