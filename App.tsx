@@ -11,12 +11,9 @@ import {
   NunitoSans_700Bold,
 } from "@expo-google-fonts/nunito-sans";
 
-import Home from "@screens/Home";
-
 import Loading from "@components/Loading";
-import NewMeal from "@screens/NewMeal";
-import DietSuccess from "@screens/DietSuccess";
-import MealDetails from "@screens/MealDetails";
+
+import { Routes } from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({ NunitoSans_400Regular, NunitoSans_700Bold });
@@ -24,9 +21,7 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StatusBar translucent style="auto" />
-      {/* {fontsLoaded ? <Home /> : <Loading />} */}
-      {/* {fontsLoaded ? <NewMeal /> : <Loading />} */}
-      {fontsLoaded ? <MealDetails /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }

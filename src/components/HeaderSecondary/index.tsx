@@ -1,15 +1,21 @@
 import React from "react";
 import { Container, Icon, IconButton, Title } from "./styles";
-import { TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   title: string;
 };
 
 const HeaderSecondary = ({ title }: Props) => {
+  const navigation = useNavigation();
+
+  const handleBackButton = () => {
+    navigation.navigate("home");
+  };
+
   return (
     <Container>
-      <Icon>
+      <Icon onPress={handleBackButton}>
         <IconButton />
       </Icon>
 

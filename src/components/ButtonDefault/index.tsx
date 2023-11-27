@@ -11,12 +11,14 @@ export type ButtonDefaultProps = {
   title: string;
   invertedBtn?: boolean;
   IconType?: "ButtonIconPlus" | "ButtonIconEdit" | "ButtonIconDelete";
+  handleOnPressFunction: () => void;
 };
 
 const ButtonDefault = ({
   title,
   invertedBtn = false,
   IconType,
+  handleOnPressFunction,
 }: ButtonDefaultProps) => {
   const IconComponents = {
     ButtonIconPlus: <ButtonIconPlus invertedBtn={invertedBtn} />,
@@ -25,7 +27,7 @@ const ButtonDefault = ({
   };
 
   return (
-    <Container invertedBtn={invertedBtn}>
+    <Container invertedBtn={invertedBtn} onPress={handleOnPressFunction}>
       {IconType && IconComponents[IconType]}
       <ButtonTitle invertedBtn={invertedBtn}>{title}</ButtonTitle>
     </Container>

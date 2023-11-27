@@ -10,6 +10,8 @@ import { ScrollView } from "react-native";
 import StatisticsArea from "@components/StatisticsArea";
 import StatisticsBigCard from "@components/StatisticsBigCard";
 
+import { useNavigation } from "@react-navigation/native";
+
 export type DataProps = {
   title: string;
   meals: meals[];
@@ -90,21 +92,30 @@ const DATA: DataProps[] = [
 ];
 
 const Home = () => {
+  const navigation = useNavigation();
+
+  const handleNewMeal = () => {
+    navigation.navigate("new");
+  };
   return (
-    /*        <ScrollView>
+    <ScrollView>
       <Container>
         <StatisticsCard percentage={92.16} />
         <Header />
         <StatisticsCard percentage={92.16} />
         <TextDefault description="Refeições" style={{ marginTop: 30 }} />
-        <ButtonDefault title="Nova refeição"  IconType="ButtonIconPlus"/>
+        <ButtonDefault
+          title="Nova refeição"
+          IconType="ButtonIconPlus"
+          handleOnPressFunction={handleNewMeal}
+        />
         <DayMeals DATA={DATA} />
       </Container>
-    </ScrollView>  */
-    <>
+    </ScrollView>
+    /*     <>
       <StatisticsBigCard percentage={42.16} />
       <StatisticsArea />
-    </>
+    </> */
   );
 };
 
