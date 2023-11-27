@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./styles";
 
 import Header from "@components/Header";
@@ -11,96 +11,37 @@ import StatisticsArea from "@components/StatisticsArea";
 import StatisticsBigCard from "@components/StatisticsBigCard";
 
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { MEAL_COLLECTION } from "@storage/storageConfig";
+import { MealProps } from "@storage/meal/mealCreate";
 
-export type DataProps = {
-  title: string;
-  meals: meals[];
-};
-
-type meals = {
-  timeInfo: string;
-  mealName: string;
-  onDiet: boolean;
-};
-
-const DATA: DataProps[] = [
-  {
-    title: "12.08.22",
-    meals: [
-      {
-        timeInfo: "09:00",
-        mealName: "Tapioca com frango",
-        onDiet: true,
-      },
-      {
-        timeInfo: "10:00",
-        mealName: "Pão de queijo",
-        onDiet: false,
-      },
-      {
-        timeInfo: "11:00",
-        mealName: "Misto completo",
-        onDiet: false,
-      },
-      {
-        timeInfo: "12:00",
-        mealName: "Refrigerante",
-        onDiet: false,
-      },
-      {
-        timeInfo: "18:00",
-        mealName: "Panqueca de ovo",
-        onDiet: true,
-      },
-      {
-        timeInfo: "22:00",
-        mealName: "Sanduíche",
-        onDiet: false,
-      },
-    ],
-  },
-  {
-    title: "13.08.22",
-    meals: [
-      {
-        timeInfo: "07:30",
-        mealName: "Pão com frango",
-        onDiet: true,
-      },
-      {
-        timeInfo: "11:20",
-        mealName: "Suco e maçã",
-        onDiet: true,
-      },
-      {
-        timeInfo: "12:00",
-        mealName: "Arroz com carne",
-        onDiet: true,
-      },
-      {
-        timeInfo: "17:00",
-        mealName: "Pipoca",
-        onDiet: true,
-      },
-      {
-        timeInfo: "22:45",
-        mealName: "Sanduíche",
-        onDiet: false,
-      },
-    ],
-  },
-];
+export type DataProps = MealProps;
 
 const Home = () => {
+  const [meals, setMeals] = useState<MealProps[]>([]);
+
+  useEffect(() => {
+    const fetchMeals = async () => {
+      try {
+        const storage = await AsyncStorage.getItem(MEAL_COLLECTION);
+
+        storage && setMeals(JSON.parse(storage));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMeals();
+  }, []);
+
   const navigation = useNavigation();
 
   const handleNewMeal = () => {
     navigation.navigate("new");
   };
+
   return (
     <ScrollView>
       <Container>
-        <StatisticsCard percentage={92.16} />
         <Header />
         <StatisticsCard percentage={92.16} />
         <TextDefault description="Refeições" style={{ marginTop: 30 }} />
@@ -109,7 +50,7 @@ const Home = () => {
           IconType="ButtonIconPlus"
           handleOnPressFunction={handleNewMeal}
         />
-        <DayMeals DATA={DATA} />
+        <DayMeals DATA={meals} />
       </Container>
     </ScrollView>
     /*     <>
@@ -120,3 +61,6 @@ const Home = () => {
 };
 
 export default Home;
+function useEffects() {
+  throw new Error("Function not implemented.");
+}

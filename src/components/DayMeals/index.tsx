@@ -8,17 +8,37 @@ type Props = ViewProps & {
   DATA: DataProps[];
 };
 
+/* 
+meal: = {
+  id: number,
+  date: string, // Formato dd/MM/yyyy
+  hour: string,
+  title: string,
+  onDiet: boolean,
+}
+*/
+
 const DayMeals = ({ DATA, ...rest }: Props) => {
+  const mealsByDate = DATA.reduce((acc: Record<string, DataProps[]>, meal) => {
+    if (!acc[meal.date]) {
+      acc[meal.date] = [];
+    }
+    acc[meal.date].push(meal);
+
+    return acc;
+  }, {});
+
   return (
     <Container {...rest}>
-      {DATA.map((data) => (
-        <View key={data.title} style={{ gap: 7 }}>
-          <Title>{data.title}</Title>
-          {data.meals.map((meal) => (
+      {Object.entries(mealsByDate).map(([date, meals]) => (
+        <View key={date} style={{ gap: 7 }}>
+          <Title>{date}</Title>
+          {meals.map((meal) => (
             <MealDetailsTimeCard
               onDiet={meal.onDiet}
-              mealName={meal.mealName}
-              timeInfo={meal.timeInfo}
+              mealName={meal.title}
+              timeInfo={meal.hour}
+              key={meal.id}
             />
           ))}
         </View>

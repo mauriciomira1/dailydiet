@@ -9,7 +9,6 @@ const CheckboxWithTitle = () => {
   const handleWithDietStatus = (selected: boolean) => {
     setOnDiet(selected);
   };
-  console.log(onDiet);
 
   return (
     <Container>

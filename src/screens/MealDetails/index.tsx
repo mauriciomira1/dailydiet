@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Description, Subtitle, Title } from "./styles";
 
-import CardDefault from "@components/CardDefault";
-import HeaderSecondary from "@components/HeaderSecondary";
 import TagOnDiet from "@components/TagOnDiet";
+import CardDefault from "@components/CardDefault";
 import ButtonDefault from "@components/ButtonDefault";
+import HeaderSecondary from "@components/HeaderSecondary";
+
 import { View } from "react-native";
 
 const MealDetails = () => {
@@ -29,11 +30,16 @@ const MealDetails = () => {
           </View>
 
           <View>
-            <ButtonDefault title="Editar Refeição" IconType="ButtonIconEdit" />
+            <ButtonDefault
+              title="Editar Refeição"
+              IconType="ButtonIconEdit"
+              handleOnPressFunction={() => {}}
+            />
             <ButtonDefault
               title="Excluir refeição"
               invertedBtn
               IconType="ButtonIconDelete"
+              handleOnPressFunction={() => {}}
             />
           </View>
         </View>
