@@ -3,12 +3,6 @@ import { useState } from "react";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 export const generalStatistic = async () => {
-  /* 
-1. Listar todas as refeições e accumular 1 naquelas que forem onDiet=true (QuantityOfMealsOnDiet)
-2. Contabilizar quantas refeições existem e dividir (MealsQuantity)
-3. return: QuantityOfMealsOnDiet/MealsQuantity
-*/
-
   try {
     const storage = await mealsGetAll();
     const mealsQuantity = storage?.length || 0;

@@ -7,6 +7,7 @@ import NewMeal from "@screens/NewMeal";
 import MealDetails from "@screens/MealDetails";
 import DietSuccess from "@screens/DietSuccess";
 import DietFail from "@screens/DietFail";
+import AllStatistics from "@screens/AllStatistics";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export const AppRoutes = () => {
       <Screen name="mealDetails" component={MealDetails} />
       <Screen name="dietSuccess" component={DietSuccess} />
       <Screen name="dietFail" component={DietFail} />
+      <Screen name="statistics" component={AllStatistics} />
     </Navigator>
   );
 };

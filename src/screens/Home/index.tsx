@@ -12,7 +12,7 @@ import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEAL_COLLECTION } from "@storage/storageConfig";
 import { MealProps } from "@storage/meal/mealCreate";
-import { generalStatistic } from "@utils/StatisticsCalc";
+import { generalStatistic } from "@utils/statisticsCalc";
 
 export type DataProps = MealProps;
 
@@ -31,6 +31,10 @@ const Home = () => {
     navigation.navigate("new", {});
   };
 
+  const handleOpenStatisticsPage = () => {
+    navigation.navigate("statistics");
+  };
+
   useFocusEffect(
     useCallback(() => {
       const fetchMeals = async () => {
@@ -47,24 +51,14 @@ const Home = () => {
     }, [meals])
   );
 
-  /*   useEffect(() => {
-    const fetchMeals = async () => {
-      try {
-        const storage = await AsyncStorage.getItem(MEAL_COLLECTION);
-
-        storage && setMeals(JSON.parse(storage));
-      } catch (error) {
-        console.log("Erro na Home ------------> ", error);
-      }
-    };
-    fetchMeals();
-  }, [meals]); */
-
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <Container>
         <Header />
-        <StatisticsCard percentage={statisticValue} />
+        <StatisticsCard
+          percentage={statisticValue}
+          handleOpenStatisticsPage={handleOpenStatisticsPage}
+        />
         <TextDefault description="Refeições" style={{ marginTop: 30 }} />
         <ButtonDefault
           title="Nova refeição"
@@ -74,14 +68,7 @@ const Home = () => {
         {meals.length > 0 && <DayMeals DATA={meals} />}
       </Container>
     </ScrollView>
-    /*     <>
-      <StatisticsBigCard percentage={42.16} />
-      <StatisticsArea />
-    </> */
   );
 };
 
 export default Home;
-function useEffects() {
-  throw new Error("Function not implemented.");
-}

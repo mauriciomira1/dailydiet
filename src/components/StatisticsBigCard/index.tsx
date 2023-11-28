@@ -6,20 +6,27 @@ import {
   PercentageTitle,
 } from "./styles";
 import { TouchableOpacity, View } from "react-native";
-import { Float } from "react-native/Libraries/Types/CodegenTypes";
 import { useTheme } from "styled-components/native";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
-  percentage: Float;
+  percentage: string;
 };
 
 const StatisticsBigCard = ({ percentage }: Props) => {
   const { COLORS } = useTheme();
 
+  const navigation = useNavigation();
+
+  const handleBackToHome = () => {
+    navigation.navigate("home");
+  };
+
   return (
     <Container percentage={percentage}>
       <TouchableOpacity
         style={{ width: 100, alignSelf: "baseline", marginLeft: -20 }}
+        onPress={handleBackToHome}
       >
         <BackIconButton />
       </TouchableOpacity>

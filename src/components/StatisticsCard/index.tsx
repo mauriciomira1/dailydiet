@@ -5,13 +5,17 @@ import { useTheme } from "styled-components/native";
 
 export type StatisticsPercentageProps = {
   percentage: number;
+  handleOpenStatisticsPage: () => void;
 };
 
-const StatisticsCard = ({ percentage }: StatisticsPercentageProps) => {
+const StatisticsCard = ({
+  percentage,
+  handleOpenStatisticsPage,
+}: StatisticsPercentageProps) => {
   const { COLORS } = useTheme();
 
   return (
-    <Container percentage={percentage}>
+    <Container percentage={percentage} onPress={handleOpenStatisticsPage}>
       <View style={{ width: "100%", alignItems: "flex-end" }}>
         <ArrowIcon
           color={+percentage > 60 ? COLORS.PRIMARY_DARK : COLORS.SECONDARY_DARK}

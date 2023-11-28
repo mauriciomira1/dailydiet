@@ -30,7 +30,7 @@ const DayMeals = ({ DATA, ...rest }: Props) => {
     return acc;
   }, {});
 
-  // Transformando data para apresentar itens em ordem cronológica
+  // Transformando data para apresentar itens em ordem cronológica por data
   const dateToTimestamp = (date: string): number => {
     const [day, month, year] = date.split("/");
     return new Date(+`20${year}`, +month - 1, +day).getTime();
@@ -48,20 +48,27 @@ const DayMeals = ({ DATA, ...rest }: Props) => {
 
   return (
     <Container {...rest}>
-      {sortedEntries.map(([date, meals]) => (
-        <View key={date} style={{ gap: 7 }}>
-          <Title>{date}</Title>
-          {meals.map((meal) => (
-            <MealDetailsTimeCard
-              onDiet={meal.onDiet}
-              mealName={meal.title}
-              timeInfo={meal.hour}
-              key={meal.id}
-              handleOnPress={() => handleGotoMealDetailsPage(meal.id!)}
-            />
-          ))}
-        </View>
-      ))}
+      {/* Classificando meals para apresentá-las em ordem cronológica por hora */}
+      {sortedEntries.map(([date, meals]) => {
+        const sortedMeals = meals.sort((a, b) => {
+          return b.hour.localeCompare(a.hour);
+        });
+
+        return (
+          <View key={date} style={{ gap: 7 }}>
+            <Title>{date}</Title>
+            {sortedMeals.map((meal) => (
+              <MealDetailsTimeCard
+                onDiet={meal.onDiet}
+                mealName={meal.title}
+                timeInfo={meal.hour}
+                key={meal.id}
+                handleOnPress={() => handleGotoMealDetailsPage(meal.id!)}
+              />
+            ))}
+          </View>
+        );
+      })}
     </Container>
   );
 };

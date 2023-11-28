@@ -10,6 +10,7 @@ export declare global {
       };
       dietSuccess: undefined;
       dietFail: undefined;
+      statistics: undefined;
     }
   }
 }

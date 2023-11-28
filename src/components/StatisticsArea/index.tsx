@@ -9,7 +9,19 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components/native";
 
-const StatisticsArea = () => {
+type Props = {
+  betterMealSequence: number;
+  registeredMealsQuantity: number;
+  onDietMealsQuantity: number;
+  outDietMealsQuantity: number;
+};
+
+const StatisticsArea = ({
+  betterMealSequence,
+  onDietMealsQuantity,
+  outDietMealsQuantity,
+  registeredMealsQuantity,
+}: Props) => {
   const { COLORS } = useTheme();
 
   return (
@@ -17,23 +29,23 @@ const StatisticsArea = () => {
       <Title>Estatísticas gerais</Title>
 
       <DataArea style={{ backgroundColor: COLORS.GRAY_6 }}>
-        <ValueTitle>22</ValueTitle>
+        <ValueTitle>{betterMealSequence}</ValueTitle>
         <Description>melhor sequência de pratos dentro da dieta</Description>
       </DataArea>
 
       <DataArea style={{ backgroundColor: COLORS.GRAY_6 }}>
-        <ValueTitle>109</ValueTitle>
+        <ValueTitle>{registeredMealsQuantity}</ValueTitle>
         <Description>refeições registradas</Description>
       </DataArea>
 
       <ShortDataArea>
         <DataArea style={{ backgroundColor: COLORS.PRIMARY_LIGHT }}>
-          <ValueTitle>109</ValueTitle>
+          <ValueTitle>{onDietMealsQuantity}</ValueTitle>
           <Description>refeições dentro da dieta</Description>
         </DataArea>
 
         <DataArea style={{ backgroundColor: COLORS.SECONDARY_LIGHT }}>
-          <ValueTitle>109</ValueTitle>
+          <ValueTitle>{outDietMealsQuantity}</ValueTitle>
           <Description>refeições fora da dieta</Description>
         </DataArea>
       </ShortDataArea>

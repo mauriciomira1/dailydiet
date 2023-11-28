@@ -1,10 +1,9 @@
-import { TouchableOpacity } from "react-native";
 import styled, { css, useTheme } from "styled-components/native";
 import { ArrowLeft } from "phosphor-react-native";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
 
 type ContainerProps = {
-  percentage: Float;
+  percentage: string;
 };
 
 export const Container = styled.View<ContainerProps>`
@@ -15,7 +14,7 @@ export const Container = styled.View<ContainerProps>`
 
   background-color: ${({ percentage }) => {
     const { COLORS } = useTheme();
-    return percentage > 60 ? COLORS.PRIMARY_LIGHT : COLORS.SECONDARY_LIGHT;
+    return +percentage > 60 ? COLORS.PRIMARY_LIGHT : COLORS.SECONDARY_LIGHT;
   }};
 `;
 
