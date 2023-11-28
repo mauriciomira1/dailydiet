@@ -3,6 +3,8 @@ import { Container, Title } from "./styles";
 import MealDetailsTimeCard from "./MealDetailsTimeCard";
 import { View, ViewProps } from "react-native";
 import { DataProps } from "@screens/Home";
+import { MealProps } from "@storage/meal/mealCreate";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = ViewProps & {
   DATA: DataProps[];
@@ -11,7 +13,7 @@ type Props = ViewProps & {
 /* 
 meal: = {
   id: number,
-  date: string, // Formato dd/MM/yyyy
+  date: string, // Formato dd/MM/yy
   hour: string,
   title: string,
   onDiet: boolean,
@@ -28,9 +30,25 @@ const DayMeals = ({ DATA, ...rest }: Props) => {
     return acc;
   }, {});
 
+  // Transformando data para apresentar itens em ordem cronológica
+  const dateToTimestamp = (date: string): number => {
+    const [day, month, year] = date.split("/");
+    return new Date(+`20${year}`, +month - 1, +day).getTime();
+  };
+
+  const sortedEntries = Object.entries(mealsByDate).sort(
+    ([dateA], [dateB]) => dateToTimestamp(dateB) - dateToTimestamp(dateA)
+  );
+
+  const navigation = useNavigation();
+
+  const handleGotoMealDetailsPage = (id: number) => {
+    navigation.navigate("mealDetails", { id });
+  };
+
   return (
     <Container {...rest}>
-      {Object.entries(mealsByDate).map(([date, meals]) => (
+      {sortedEntries.map(([date, meals]) => (
         <View key={date} style={{ gap: 7 }}>
           <Title>{date}</Title>
           {meals.map((meal) => (
@@ -39,6 +57,7 @@ const DayMeals = ({ DATA, ...rest }: Props) => {
               mealName={meal.title}
               timeInfo={meal.hour}
               key={meal.id}
+              handleOnPress={() => handleGotoMealDetailsPage(meal.id!)}
             />
           ))}
         </View>

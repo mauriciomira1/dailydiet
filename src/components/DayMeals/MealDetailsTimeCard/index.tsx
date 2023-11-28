@@ -5,11 +5,17 @@ type Props = {
   timeInfo: string;
   mealName: string;
   onDiet: boolean;
+  handleOnPress: () => void;
 };
 
-const MealDetailsTimeCard = ({ timeInfo, mealName, onDiet = false }: Props) => {
+const MealDetailsTimeCard = ({
+  handleOnPress,
+  timeInfo,
+  mealName,
+  onDiet = false,
+}: Props) => {
   return (
-    <Container>
+    <Container onPress={handleOnPress}>
       <TimeInfo>{timeInfo}</TimeInfo>
       <MealName>{mealName}</MealName>
       <Status onDiet={onDiet} />

@@ -11,6 +11,6 @@ export const mealsGetAll = async () => {
 
     return meals;
   } catch (error) {
-    console.log(error);
+    console.log("Erro em mealsGetAll --------->", error);
   }
 };

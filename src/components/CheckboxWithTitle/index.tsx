@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { ButtonSection, Container, Title } from "./styles";
 import { CheckboxButton } from "./CheckboxButton";
 
-const CheckboxWithTitle = () => {
+type Props = {
+  handleOnDietToogle: (selected: boolean) => void;
+};
+
+const CheckboxWithTitle = ({ handleOnDietToogle }: Props) => {
   // O dado de saída para "está dentro da dieta?" é o onDiet<boolean>
   const [onDiet, setOnDiet] = useState(false);
 
   const handleWithDietStatus = (selected: boolean) => {
     setOnDiet(selected);
+    handleOnDietToogle(selected);
   };
 
   return (

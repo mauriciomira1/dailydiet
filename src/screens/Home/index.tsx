@@ -27,16 +27,16 @@ const Home = () => {
 
         storage && setMeals(JSON.parse(storage));
       } catch (error) {
-        console.log(error);
+        console.log("Erro na Home ------------> ", error);
       }
     };
     fetchMeals();
-  }, []);
+  }, [meals]);
 
   const navigation = useNavigation();
 
   const handleNewMeal = () => {
-    navigation.navigate("new");
+    navigation.navigate("new", {});
   };
 
   return (

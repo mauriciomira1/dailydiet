@@ -4,19 +4,20 @@ import { MEAL_COLLECTION } from "@storage/storageConfig";
 
 import { mealsGetAll } from "./mealsGetAll";
 import { AppError } from "@utils/AppError";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 export type MealProps = {
-  id: number;
-  date: string; // Formato dd/MM/yyyy
+  id?: number;
+  date: string; // Formato dd/MM/yy
   hour: string;
   title: string;
+  description: string;
   onDiet: boolean;
 };
 
 export const mealCreate = async (newMeal: MealProps) => {
   try {
-    const storageMeals = await mealsGetAll();
+    const storageMeals = (await mealsGetAll()) || [];
 
     const mealsAlreadyExists = storageMeals?.some((meal) => {
       meal.id;
@@ -29,21 +30,22 @@ export const mealCreate = async (newMeal: MealProps) => {
     }
 
     // Criando id aleatório (para simular o DB)
-    const date = new Date(newMeal.date);
+
     const id = Math.floor(Math.random() * 1000000);
     newMeal.id = id;
 
     // Formatando data
-    const formattedDate = format(date, "dd/MM/yyyy");
+    const parseDate = parse(newMeal.date, "dd/MM/yy", new Date());
+    const formattedDate = format(parseDate, "dd/MM/yy");
     newMeal.date = formattedDate;
 
-    const newStorageMeals: MealProps[] = [...storageMeals!, newMeal];
+    const newStorageMeals: MealProps[] = [...storageMeals, newMeal];
 
     await AsyncStorage.setItem(
       MEAL_COLLECTION,
       JSON.stringify(newStorageMeals)
     );
   } catch (error) {
-    console.log(error);
+    console.log("Erro em mealCreate --------->", error);
   }
 };

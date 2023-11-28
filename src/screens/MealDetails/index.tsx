@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Container, Description, Subtitle, Title } from "./styles";
 
 import TagOnDiet from "@components/TagOnDiet";
@@ -7,44 +7,91 @@ import ButtonDefault from "@components/ButtonDefault";
 import HeaderSecondary from "@components/HeaderSecondary";
 
 import { View } from "react-native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
+import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { MealProps } from "@storage/meal/mealCreate";
+import Loading from "@components/Loading";
+import mealRemoveById from "@storage/meal/mealRemoveById";
+
+type RouteParams = {
+  id: number;
+};
 
 const MealDetails = () => {
-  return (
+  const [meal, setMeal] = useState<MealProps>();
+  const navigation = useNavigation();
+
+  const router = useRoute();
+  const { id } = router.params as RouteParams;
+
+  const fetchMealData = async () => {
+    const storage = await mealsGetAll();
+    const meal = storage?.find((item) => item.id === id);
+    setMeal(meal);
+    console.log("Meal do mealdetails ------------>", meal);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchMealData();
+    }, [])
+  );
+
+  const handleEditMeal = (id: number) => {
+    navigation.navigate("new", { id });
+  };
+
+  const handleRemoveMeal = async (id: number) => {
+    mealRemoveById(id);
+    navigation.navigate("home");
+  };
+
+  return meal ? (
     <Container>
       <HeaderSecondary title="Refeição" />
 
       <CardDefault>
         <View style={{ flex: 1, justifyContent: "space-between" }}>
           <View>
-            <Title>Sanduíche</Title>
+            <Title>{meal.title}</Title>
 
-            <Description>
-              Sanduíche de pão integral com atum e salada de alface e tomate
-            </Description>
+            <Description>{meal.description}</Description>
 
             <Subtitle>Data e hora</Subtitle>
 
-            <Description>12/08/2022 às 16:00</Description>
+            <Description>
+              {meal.date} às {meal.hour}
+            </Description>
 
-            <TagOnDiet type="fora da dieta" />
+            {meal.onDiet ? (
+              <TagOnDiet type="dentro da dieta" />
+            ) : (
+              <TagOnDiet type="fora da dieta" />
+            )}
           </View>
 
           <View>
             <ButtonDefault
               title="Editar Refeição"
               IconType="ButtonIconEdit"
-              handleOnPressFunction={() => {}}
+              handleOnPressFunction={() => handleEditMeal(id)}
             />
             <ButtonDefault
               title="Excluir refeição"
               invertedBtn
               IconType="ButtonIconDelete"
-              handleOnPressFunction={() => {}}
+              handleOnPressFunction={() => handleRemoveMeal(id)}
             />
           </View>
         </View>
       </CardDefault>
     </Container>
+  ) : (
+    <Loading />
   );
 };
 
