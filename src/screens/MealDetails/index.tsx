@@ -32,7 +32,6 @@ const MealDetails = () => {
     const storage = await mealsGetAll();
     const meal = storage?.find((item) => item.id === id);
     setMeal(meal);
-    console.log("Meal do mealdetails ------------>", meal);
   };
 
   useFocusEffect(

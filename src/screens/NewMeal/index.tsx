@@ -17,6 +17,7 @@ import {
 } from "@react-navigation/native";
 import { MealProps, mealCreate } from "@storage/meal/mealCreate";
 import { mealsGetAll } from "@storage/meal/mealsGetAll";
+import { mealUpdate } from "@storage/meal/mealUpdate";
 
 type RouteParams = {
   id: number;
@@ -31,36 +32,38 @@ const NewMeal = () => {
   const [meal, setMeal] = useState<MealProps>();
 
   const route = useRoute();
-  const { id } = route.params as RouteParams;
+  const { id } = (route.params as RouteParams) || undefined;
+
   const navigation = useNavigation();
 
+  // Só será chamado se houver um params ID passado
   const fetchMealData = async () => {
     try {
       const storage = await mealsGetAll();
-      const meal = storage?.find((meal) => meal.id === id);
-      meal && setMeal(meal);
-      meal &&
-        (setTitle(meal.title),
-        setDescription(meal.description),
-        setDate(meal.date),
-        setHour(meal.hour),
-        setOnDiet(meal.onDiet));
 
-      console.log(meal);
+      if (storage !== undefined) {
+        const meal = storage.find((meal) => meal.id === id);
+        meal && setMeal(meal);
+        meal &&
+          (setTitle(meal.title),
+          setDescription(meal.description),
+          setDate(meal.date),
+          setHour(meal.hour),
+          setOnDiet(meal.onDiet));
+      }
+      return;
     } catch (error) {
       console.log("Erro na NewMeal(fetchMealData)--------------->", error);
     }
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      fetchMealData();
-    }, [])
-  );
-
-  /*   useEffect(() => {
-
-  }, []); */
+  // Se houver um ID (ou seja, se estiver tentando atualizar uma meal) ele atualiza a tela com os dados atuais da meal nos inputs)
+  id &&
+    useFocusEffect(
+      useCallback(() => {
+        fetchMealData();
+      }, [])
+    );
 
   type InputNameProps = "title" | "description" | "date" | "hour" | "onDiet";
 
@@ -88,6 +91,19 @@ const NewMeal = () => {
   };
 
   const handleCreateMeal = async () => {
+    if (id !== undefined) {
+      const meal: MealProps = { id, date, hour, onDiet, title, description };
+
+      try {
+        await mealUpdate(meal);
+      } catch (error) {
+        console.log("Erro no NewMeal handleCreateMeal------>", error);
+      }
+
+      navigation.navigate("home");
+      return;
+    }
+
     const meal = { date, hour, onDiet, title, description };
 
     try {

@@ -1,24 +1,23 @@
 import React from "react";
 import { ArrowIcon, Container, Description, PercentageTitle } from "./styles";
 import { View } from "react-native";
-import { Float } from "react-native/Libraries/Types/CodegenTypes";
 import { useTheme } from "styled-components/native";
 
-type Props = {
-  percentage: Float;
+export type StatisticsPercentageProps = {
+  percentage: number;
 };
 
-const StatisticsCard = ({ percentage }: Props) => {
+const StatisticsCard = ({ percentage }: StatisticsPercentageProps) => {
   const { COLORS } = useTheme();
 
   return (
     <Container percentage={percentage}>
       <View style={{ width: "100%", alignItems: "flex-end" }}>
         <ArrowIcon
-          color={percentage > 60 ? COLORS.PRIMARY_DARK : COLORS.SECONDARY_DARK}
+          color={+percentage > 60 ? COLORS.PRIMARY_DARK : COLORS.SECONDARY_DARK}
         />
       </View>
-      <PercentageTitle>{percentage}%</PercentageTitle>
+      <PercentageTitle>{parseFloat(percentage.toFixed(2))}%</PercentageTitle>
       <Description>das refeições dentro da dieta</Description>
     </Container>
   );

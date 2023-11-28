@@ -9,7 +9,7 @@ import { format, parse } from "date-fns";
 export type MealProps = {
   id?: number;
   date: string; // Formato dd/MM/yy
-  hour: string;
+  hour: string; // Formato 00:00
   title: string;
   description: string;
   onDiet: boolean;
@@ -17,20 +17,29 @@ export type MealProps = {
 
 export const mealCreate = async (newMeal: MealProps) => {
   try {
-    const storageMeals = (await mealsGetAll()) || [];
+    let storageMeals = (await mealsGetAll()) || [];
 
-    const mealsAlreadyExists = storageMeals?.some((meal) => {
-      meal.id;
-    });
+    if (!Array.isArray(storageMeals)) {
+      storageMeals = [];
+    }
 
-    if (mealsAlreadyExists) {
-      throw new AppError(
-        "Já existe uma refeição com esse título nesse mesmo horário."
-      );
+    if (newMeal.id !== undefined) {
+      const mealsAlreadyExists = storageMeals?.some((meal) => {
+        return (
+          meal.title === newMeal.title &&
+          meal.hour === newMeal.hour &&
+          meal.date === newMeal.date
+        );
+      });
+
+      if (mealsAlreadyExists) {
+        throw new AppError(
+          "Já existe uma refeição com esse título nesse mesmo horário nessa data."
+        );
+      }
     }
 
     // Criando id aleatório (para simular o DB)
-
     const id = Math.floor(Math.random() * 1000000);
     newMeal.id = id;
 

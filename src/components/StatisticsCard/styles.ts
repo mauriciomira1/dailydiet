@@ -2,19 +2,16 @@ import { TouchableOpacity } from "react-native";
 import styled, { css, useTheme } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 import { Float } from "react-native/Libraries/Types/CodegenTypes";
+import { StatisticsPercentageProps } from ".";
 
-type ContainerProps = {
-  percentage: Float;
-};
-
-export const Container = styled(TouchableOpacity)<ContainerProps>`
+export const Container = styled(TouchableOpacity)<StatisticsPercentageProps>`
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   padding: 10px;
   background-color: ${({ percentage }) => {
     const { COLORS } = useTheme();
-    return percentage > 60 ? COLORS.PRIMARY_LIGHT : COLORS.SECONDARY_LIGHT;
+    return +percentage > 60 ? COLORS.PRIMARY_LIGHT : COLORS.SECONDARY_LIGHT;
   }};
 `;
 
