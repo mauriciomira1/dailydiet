@@ -5,7 +5,7 @@ import { useTheme } from "styled-components/native";
 
 export type StatisticsPercentageProps = {
   percentage: number;
-  handleOpenStatisticsPage: () => void;
+  handleOpenStatisticsPage?: () => void;
 };
 
 const StatisticsCard = ({

@@ -6,7 +6,7 @@ import CardDefault from "@components/CardDefault";
 import ButtonDefault from "@components/ButtonDefault";
 import HeaderSecondary from "@components/HeaderSecondary";
 
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import {
   useFocusEffect,
   useNavigation,
@@ -45,8 +45,19 @@ const MealDetails = () => {
   };
 
   const handleRemoveMeal = async (id: number) => {
-    mealRemoveById(id);
-    navigation.navigate("home");
+    Alert.alert("Excluir", "Deseja excluir essa refeição?", [
+      {
+        text: "Cancelar",
+        style: "cancel",
+      },
+      {
+        text: "Sim",
+        onPress: () => {
+          mealRemoveById(id);
+          navigation.navigate("home");
+        },
+      },
+    ]);
   };
 
   return meal ? (

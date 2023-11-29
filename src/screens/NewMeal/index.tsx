@@ -114,7 +114,11 @@ const NewMeal = () => {
       console.log("Erro em NewMeal ------------->", error);
     }
 
-    navigation.navigate("home");
+    {
+      meal.onDiet
+        ? navigation.navigate("dietSuccess")
+        : navigation.navigate("dietFail");
+    }
   };
 
   return (
