@@ -10,16 +10,4 @@ export const Container = styled.View`
   border-top-right-radius: 18px;
 
   padding: 24px;
-
-  ${Platform.select({
-    ios: {
-      shadowColor: "#000",
-      shadowOffset: { width: 0, height: -20 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-    },
-    android: {
-      elevation: 1,
-    },
-  })}
 `;
